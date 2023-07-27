@@ -1,0 +1,40 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Manager implements Employee {
+
+    // Toda esta clase se utiliza para implementar los valores a los empleados, así tener todo asignado
+    //  mediante el uso de  Arrays. Ademas de returnar en caso de ser necesario
+    private List<Employee> employees = new ArrayList<>();
+    private String name;
+
+    public Manager(String name) {
+        this.name = name;
+    }
+    
+
+    @Override
+    public void add(Employee e) {
+        if (e != null) {
+            this.employees.add(e);
+        }
+    }
+
+    @Override
+    public int calculatePoints() {
+        if (this.employees.isEmpty()) {
+            return 0;
+        }
+        return Math.round(this.employees.stream().mapToInt(e -> {
+            System.out.println(e);
+            return e.calculatePoints();
+        }).sum());
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+}
